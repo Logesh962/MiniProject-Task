@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Dashboard</title>
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.1.9/dist/sweetalert2.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+     <!-- Bootstrap CSS -->
+     
+     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css">
+
+  <!-- Bootstrap Table CSS -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-table@1.18.3/dist/bootstrap-table.min.css">
+
+  <!-- jQuery -->
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+
+  <!-- Bootstrap Table JS -->
+  <link rel="stylesheet" href="./css/userDashboard.css">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap-table@1.18.3/dist/bootstrap-table.min.js"></script>
+</head>
+<body>
+    <div class="modal" id="myModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+        <div class="modal-content">
+        <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Update Status</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div class="md-3">
+            <label for="descriptionInput1" class="form-label">Comments</label>
+            <textarea class="form-control" id="commentsInput1" rows="2" placeholder="Enter comments"></textarea>
+        </div>  
+        <!-- Status Dropdown -->
+        <div class="mb-3">
+
+        <label for="statusDropdown" class="form-label">Status</label>
+        <select class="form-select" id="statusDropdown" name="status" required>
+        <option selected>Select status</option>
+        <option value="Completed">Completed</option>
+        <option value="In Progress">In Progress</option>
+        <option value="Pending">Pending</option>
+        </select>
+        </div>
+        </div>
+        <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" data-bs-dismiss="modal" id = "modelChange">Save Status</button>
+        </div>
+        </div>
+        </div>
+        </div>
+    <div class="navbar1">
+        <nav class="navbar navbar-expand-lg navbar-dark" style="background-color:rgb(38, 38, 170);height: 80px;" >
+        <div class="container-fluid">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+                <img src="https://www.getexceltemplates.com/wp-content/uploads/2016/03/to-do-list-512.jpg"></img>
+            </button>
+            <img src="https://www.getexceltemplates.com/wp-content/uploads/2016/03/to-do-list-512.jpg" id="logo"></img>
+            <a class="navbar-brand" href="index.html"><h2>Task-Tracker Application</h2></a>
+            
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a href="./index.html"><button id="but2">Logout</button></a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    </div>
+    <div class="containertable">
+      <div class="welcome-message"id="para">Hello, User!</div>
+      <div class="dropdown-container">
+          
+          <h3>Status Filter</h3>
+          <select id="dropdownsts" class="dropdown" onclick="data(value)" >
+            <option value="Status" class="dropdown1">Status</option>
+            <option value="Completed" class="dropdown1">Completed</option>
+              <option value="In Progress" class="dropdown1">In Progress</option>
+              <option value="Pending" class="dropdown1">Pending</option>
+              <!-- Add more options as needed -->
+          </select>
+         
+      </div>
+  </div>
+  <div class="input-group">
+    <h3 id ="search">Search</h3>
+    <input type="search"id="searchInput" placeholder="search or enter the text">
+</div>
+  <image src="https://tse4.mm.bing.net/th/id/OIP.atse-BYuJefye2ARfaZ58wAAAA?rs=1&pid=ImgDetMain"id="replaceimage"></image>
+    <div class="container mt-4">
+        <table class="table table-bordered table-striped mb-0"
+          id="editableTable">
+          <thead  style="background-color: #364e51;">
+            <tr>
+              <th onclick="sorting(0)">Id</th>
+              <th onclick="sorting(1)">Title</th>
+              <th onclick="sorting(2)" >Description</th>
+              <th onclick="sorting(2)" >Duration</th>
+              <th onclick="sorting(2)" >Comments</th>
+              <th onclick="sorting(4)">Status</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody id="data1">
+             
+          </tbody>
+        </table>
+      </div>
+      <script src="./js/userDashboard.js"></script>
+</body>
+</html>

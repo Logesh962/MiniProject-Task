@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <script src="sweetalert2.min.js"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.2.6/dist/sweetalert2.min.css">
+  <title>Admin Dashboard</title>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+  <link rel="stylesheet" href="./css/admintask.css">
+</head>
+
+<body>
+  <div class="navbar1">
+    <nav class="navbar navbar-expand-lg navbar-dark" style="background-color:rgb(38, 38, 170);height: 80px;">
+      <div class="container-fluid">
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+          aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <img src="https://www.getexceltemplates.com/wp-content/uploads/2016/03/to-do-list-512.jpg" id="logo"></img>
+        <a href="./index.html"><button id="but1">Home</button></a>
+        <p id="adminpara">Hello Admin !</p>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav ms-auto">
+            <li class="nav-item">
+            </li>
+            <li class="nav-item">
+              <a href="./adminLogin.html"><button id="but2">Logout</button></a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+  </div>
+
+  <main class="table">
+    <section class="table__header">
+      <h3>Search</h3>
+
+      <div class="input-group">
+        <input type="search" id="searchInput" placeholder="Search ....">
+      </div>
+      <select id="dropdownsts" class="dropdown" onclick="filteringStatus(value)">
+        <option value="Status" class="dropdown1">Status</option>
+        <option value="Completed" class="dropdown1">Completed</option>
+        <option value="In Progress" class="dropdown1">In Progress</option>
+        <option value="Pending" class="dropdown1">Pending</option>
+      </select>
+      
+      <button type="button" data-bs-toggle="modal" data-bs-target="#addUserModal" id="but" onclick="Add()"> Assign
+        Task</button>
+      </div>
+    </section>
+    <section class="table__body">
+      <table id="myTable">
+        <thead>
+          <tr>
+            <th> Id<span class="icon-arrow" onclick="sortTable(0)">&UpArrow;</span></th>
+            <th> Title </th>
+            <th> Description </th>
+            <th> DeadLine </th>
+            <th> Assigned To </span></th>
+            <th> Comments </th>
+            <th> Created_At</th>
+            <th> Status </span></th>
+            <th> Action </th>
+
+          </tr>
+        </thead>
+        <tbody id="TableData">
+        </tbody>
+      </table>
+    </section>
+  </main>
+  <div class="modal fade" id="addUserModal" tabindex="-1" aria-labelledby="addUserModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="addUserModalLabel">Add New Task</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <form id="addUserForm">
+          <div class="modal-body">
+            <!-- Title Input -->
+            <div class="mb-3">
+              <label for="titleInput" class="form-label">Title</label>
+              <input type="text" class="form-control" id="titleInput" name="title" placeholder="Enter title" required>
+            </div>
+            <!-- Username Input -->
+            <div class="mb-3">
+              <label for="usernameInput" class="form-label">Username</label>
+              <select class="form-select" id="usernameInput" name="User" required>
+              </select>
+            </div>
+
+            <!-- Description Input -->
+            <div class="mb-3">
+              <label for="descriptionInput" class="form-label">Description</label>
+              <textarea class="form-control" id="descriptionInput" name="description" rows="2"
+                placeholder="Enter description" required></textarea>
+            </div>
+            <div class="mb-3">
+              <label for="descriptionInput" class="form-label">DeadLine</label>
+              <input type="date" class="form-control" id="durationInput" name="description" rows="2" placeholder="Enter deadline date"
+                required min="2023-11-24"></input>
+            </div>
+            <div class="mb-3">
+              <label for="descriptionInput" class="form-label">Comments</label>
+              <textarea class="form-control" id="commentsInput" name="description" rows="2" placeholder="Enter Comments"
+                required></textarea>
+            </div>
+
+            <!-- Status Dropdown -->
+            <div class="mb-3">
+              <label for="statusDropdown" class="form-label">Status</label>
+              <select class="form-select" id="statusDropdown" name="status" required>
+                <option selected>Select status</option>
+                <option value="Completed">Completed</option>
+                <option value="In Progress">In Progress</option>
+                <option value="Pending">Pending</option>
+              </select>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <button type="submit" class="btn btn-primary" data-bs-dismiss="modal" onclick="TaskSave()">Save
+              Task</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="editModalLabel">Edit Task</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <form>
+          <div class="modal-body">
+            <div class="md-3">
+              <label for="titleInput1" class="form-label">Title</label>
+              <input type="text" class="form-control" id="titleInput1" placeholder="Enter title">
+            </div>
+            <div class="md-3">
+              <label for="descriptionInput1" class="form-label">Description</label>
+              <textarea class="form-control" id="descriptionInput1" rows="2" placeholder="Enter description"></textarea>
+            </div>
+            <div class="md-3">
+              <label for="username1" class="form-label">Username</label>
+              <select class="form-select" id="username1" name="Assigned" required>
+              </select>
+
+            </div>
+            <div class="md-3">
+              <label for="descriptionInput1" class="form-label">Duration</label>
+              <textarea class="form-control" id="durationInput1" rows="2" placeholder="Enter duration"></textarea>
+            </div>
+            <div class="md-3">
+              <label for="descriptionInput1" class="form-label">Comments</label>
+              <textarea class="form-control" id="commentsInput1" rows="2" placeholder="Enter comments"></textarea>
+            </div>
+            <div class="md-3">
+              <label for="statusDropdown1" class="form-label">Status</label>
+              <select class="form-select" id="statusDropdown1">
+                <option selected>Select status</option>
+                <option value="In Progress">In Progress</option>
+                <option value="Completed">Completed</option>
+                <option value="Pending">Pending</option>
+              </select>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <button id="editmodalDOM">EditTask</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  <script src="./js/admintask.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
+
+</body>
+
+</html>
